@@ -1,0 +1,94 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+	<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Carrier: {{carrier.name}}</h5>
+			<hr>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'update_carrier' carrier.pk %}">Update Carrier</a>
+			<a class="btn btn-outline-success  btn-sm btn-block" href="{% url 'new_sim' carrier.pk %}">Add New Sim</a>
+
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Contact Information</h5>
+			<hr>
+			<p>Email: {{ carrier.email }} </p>
+			<p>Phone: {{ carrier.phone }}</p>
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Total SIMS</h5>
+			<hr>
+			<h1 style="text-align: center;padding: 10px">{{ carrier_sim_count }} </h1>
+		</div>
+	</div>
+</div>
+
+
+<br>
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="get">
+
+                       			 {{ my_filter.form.status|as_crispy_field }}
+                       			 <button class="btn btn-primary btn-sm" type="submit">Search</button>
+
+
+            </form>
+		</div>
+	</div>
+
+</div>
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm"
+                   data-toggle="table"
+                   data-pagination="true"
+                   data-search="true"
+                   data-search-align="right"
+                   data-page-list="[10, 20, 50, All]">
+<thead class="thead-dark">
+				<tr>
+					<th data-feld="iccid" data-sortable="true" scope="col">ICCID</th>
+					<th data-feld="imsi" data-sortable="true" scope="col">IMSI</th>
+					<th data-feld="country" data-sortable="true" scope="col">Country</th>
+					<th data-feld="package" data-sortable="true" scope="col">Package</th>
+					<th data-feld="status" data-sortable="true" scope="col">Status</th>
+					<th></th>
+					<th></th>
+				</tr>
+</thead>
+				{% for sim in carrier_sims %}
+				<tr>
+					<td>{{ sim.iccid }}</td>
+					<td>{{ sim.imsi }}</td>
+                    <td>{{ sim.country_assigned }}</td>
+					<td>{{ sim.package_name }}</td>
+                    <td>{{ sim.status }}</td>
+                    <td><a href="{% url 'update_sim' sim.pk %}" class="btn btn-dark btn-sm" role="button">Edit</a></td>
+					<td><a href="{% url 'delete_sim' sim.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a></td>
+
+				</tr>
+
+
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <table class="table table-sm table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Carrier</th>
+                <th scope="col">Country</th>
+                <th scope="col">Assigned</th>
+                <th scope="col">ICCID</th>
+                <th scope="col">IMSI</th>
+                <th scope="col">GB</th>
+                <th scope="col">Package</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Carrier</td>
+                <td>Country</td>
+                <td>Assigned</td>
+                <td>ICCID</td>
+                <td>IMSI</td>
+                <td>GB</td>
+                <td>Package</td>
+                <td>Status</td>
+                <td>
+                    <a href="" class="btn btn-dark btn-sm" role="button">Edit</a>
+                    <a href="" class="btn btn-danger btn-sm" role="button">Del</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

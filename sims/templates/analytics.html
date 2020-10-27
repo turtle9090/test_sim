@@ -1,0 +1,186 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+    <h5>Package Analysis</h5>
+    <div class="card card-body">
+        <table class="table table-sm"
+               data-toggle="table"
+               data-search="true"
+               data-search-align="right">
+<thead class="thead-dark">
+            <tr>
+                    <th data-feld="country" data-sortable="true" scope="col">Country</th>
+                    <th data-feld="packages" data-sortable="true" scope="col">Package</th>
+                    <th data-feld="total data" data-sortable="true" scope="col">Total Data (GB)</th>
+                    <th data-feld="use data" data-sortable="true" scope="col">Used Data (GB)</th>
+                    <th data-feld="remaining data" data-sortable="true" scope="col">Remaining Data (GB)</th>
+                    <th data-feld="avg use" data-sortable="true" scope="col">Daily Average Use (GB)</th>
+                    <th data-feld="days left" data-sortable="true" scope="col">Days left</th>
+
+            </tr>
+</thead>
+            <tr class="table-secondary">
+                    <td><b>EU</b></td>
+                    <td><b>Europe</b></td>
+                    <td><b>{{ total_eu.total_data__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ used_eu.used_traffic_gb__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ remaining_eu.remaining_traffic_gb__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ avg_eu.daily_average_use__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ days_eu.days_left__sum|floatformat:2 }}</b></td>
+                </tr>
+                {% for package in package_vdf %}
+                <tr>
+                    <td>{{ package.countries_or_regions }}</td>
+                    <td>{{ package.name  }} -  (Europe)</td>
+                    <td>{{ package.total_data|floatformat:2  }}</td>
+                    <td>{{ package.used_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.remaining_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.daily_average_use|floatformat:2 }}</td>
+                    <td>{{ package.days_left|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+                {% for package in package_be %}
+                <tr>
+                    <td>{{ package.countries_or_regions }}</td>
+                    <td>{{ package.name  }} (Europe)</td>
+                    <td>{{ package.total_data|floatformat:2  }}</td>
+                    <td>{{ package.used_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.remaining_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.daily_average_use|floatformat:2 }}</td>
+                    <td>{{ package.days_left|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            <tr class="table-secondary">
+                    <td><b>QA</b></td>
+                    <td><b>Qatar</b></td>
+                    <td><b>{{ total_qa.total_data__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ used_qa.used_traffic_gb__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ remaining_qa.remaining_traffic_gb__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ avg_qa.daily_average_use__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ days_qa.days_left__sum|floatformat:2 }}</b></td>
+                </tr>
+                {% for package in package_qa %}
+                <tr>
+                    <td>{{ package.countries_or_regions }}</td>
+                    <td>{{ package.name  }}</td>
+                    <td>{{ package.total_data|floatformat:2  }}</td>
+                    <td>{{ package.used_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.remaining_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.daily_average_use|floatformat:2 }}</td>
+                    <td>{{ package.days_left|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            <tr class="table-secondary">
+                    <td><b>RO</b></td>
+                    <td><b>Romania</b></td>
+                    <td><b>{{ total_ro.total_data__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ used_ro.used_traffic_gb__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ remaining_ro.remaining_traffic_gb__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ avg_ro.daily_average_use__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ days_ro.days_left__sum|floatformat:2 }}</b></td>
+                </tr>
+                {% for package in package_ro %}
+                <tr>
+                    <td>{{ package.countries_or_regions }}</td>
+                    <td>{{ package.name  }}</td>
+                    <td>{{ package.total_data|floatformat:2  }}</td>
+                    <td>{{ package.used_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.remaining_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.daily_average_use|floatformat:2 }}</td>
+                    <td>{{ package.days_left|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            <tr class="table-secondary">
+                    <td><b>CL</b></td>
+                    <td><b>Chile</b></td>
+                    <td><b>{{ total_cl.total_data__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ used_cl.used_traffic_gb__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ remaining_cl.remaining_traffic_gb__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ avg_cl.daily_average_use__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ days_cl.days_left__sum|floatformat:2 }}</b></td>
+                </tr>
+                {% for package in package_cl %}
+                <tr>
+                    <td>{{ package.countries_or_regions }}</td>
+                    <td>{{ package.name  }}</td>
+                    <td>{{ package.total_data|floatformat:2  }}</td>
+                    <td>{{ package.used_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.remaining_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.daily_average_use|floatformat:2 }}</td>
+                    <td>{{ package.days_left|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            <tr class="table-secondary">
+                    <td><b>AF</b></td>
+                    <td><b>Afghanistan</b></td>
+                    <td><b>{{ total_af.total_data__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ used_af.used_traffic_gb__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ remaining_af.remaining_traffic_gb__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ avg_af.daily_average_use__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ days_af.days_left__sum|floatformat:2 }}</b></td>
+                </tr>
+                {% for package in package_af %}
+                <tr>
+                    <td>{{ package.countries_or_regions }}</td>
+                    <td>{{ package.name  }}</td>
+                    <td>{{ package.total_data|floatformat:2  }}</td>
+                    <td>{{ package.used_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.remaining_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.daily_average_use|floatformat:2 }}</td>
+                    <td>{{ package.days_left|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            <tr class="table-secondary">
+                    <td><b>FR</b></td>
+                    <td><b>France</b></td>
+                    <td><b>{{ total_fr.total_data__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ used_fr.used_traffic_gb__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ remaining_fr.remaining_traffic_gb__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ avg_fr.daily_average_use__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ days_fr.days_left__sum|floatformat:2 }}</b></td>
+                </tr>
+                {% for package in package_fr %}
+                <tr>
+                    <td>{{ package.countries_or_regions }}</td>
+                    <td>{{ package.name  }}</td>
+                    <td>{{ package.total_data|floatformat:2  }}</td>
+                    <td>{{ package.used_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.remaining_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.daily_average_use|floatformat:2 }}</td>
+                    <td>{{ package.days_left|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            <tr class="table-secondary">
+                    <td><b>SG</b></td>
+                    <td><b>Singapore</b></td>
+                    <td><b>{{ total_sg.total_data__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ used_sg.used_traffic_gb__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ remaining_sg.remaining_traffic_gb__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ avg_sg.daily_average_use__sum|floatformat:2 }}</b></td>
+                    <td><b>{{ days_sg.days_left__sum|floatformat:2 }}</b></td>
+                </tr>
+                {% for package in package_sg %}
+                <tr>
+                    <td>{{ package.countries_or_regions }}</td>
+                    <td>{{ package.name  }}</td>
+                    <td>{{ package.total_data|floatformat:2  }}</td>
+                    <td>{{ package.used_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.remaining_traffic_gb|floatformat:2 }}</td>
+                    <td>{{ package.daily_average_use|floatformat:2 }}</td>
+                    <td>{{ package.days_left|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+
+        </table>
+    </div>
+</div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}

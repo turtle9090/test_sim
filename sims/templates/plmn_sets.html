@@ -1,0 +1,94 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+.selected{
+  background-color:#d6d8db;
+  font-weight: bold;
+}
+.bad{
+  background-color:white;
+}</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(function(){
+  $("tr").each(function(){
+    var col_val = $(this).find("td:eq(1)").text();
+    if (col_val == "Total"){
+      $(this).addClass('selected');
+    } else {
+      $(this).addClass('bad');
+    }
+  });
+});
+</script>
+<script type="text/javascript">
+if (A==0)
+{
+  document.getElementById("rowA").style.display="none";
+}
+else
+{
+  document.getElementById("rowA").style.display="";
+}
+</script>
+</script>
+
+<br>
+<div class="row">
+    <div class="col-md">
+
+        <div class="card card-body">
+    <h5>PLMN Set Analysis</h5>
+    <div class="card card-body">
+        <div class="table-responsive-sm">
+<table id="plmn" class="table table-sm"
+               data-toggle="table"
+               data-search="true"
+               data-search-align="right">
+
+<thead class="thead-dark">
+            <tr>
+                    <th data-feld="country code" data-sortable="true" scope="col">Code</th>
+                    <th data-feld="country" data-sortable="true" scope="col">Country</th>
+                    <th data-feld="total sims" data-sortable="true" scope="col">Total SIMS</th>
+                    <th data-feld="enable" data-sortable="true" scope="col">Enable SIMS</th>
+                    <th data-feld="disable" data-sortable="true" scope="col">Disable SIMS</th>
+                    <th data-feld="pending" data-sortable="true" scope="col">Pending SIMS</th>
+                    <th data-feld="pre disabled" data-sortable="true" scope="col">Pre Disable SIMS</th>
+                    <th data-feld="total data" data-sortable="true" scope="col">Total Data (GB)</th>
+                    <th data-feld="remaining data" data-sortable="true" scope="col">Remaining Data (GB)</th>
+                    <th data-feld="use data" data-sortable="true" scope="col">Used Data (GB)</th>
+                    <th data-feld="avg" data-sortable="true" scope="col">Daily Avg (GB)</th>
+                    <th data-feld="days" data-sortable="true" scope="col">Days Left</th>
+
+
+            </tr>
+</thead>
+
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.country }}</td>
+                        <td>{{ item.package }}</td>
+                        <td>{{ item.total  }}</td>
+                        <td>{{ item.enable }}</td>
+                        <td>{{ item.disable }}</td>
+                        <td>{{ item.pending }}</td>
+                        <td>{{ item.pre_disable }}</td>
+                        <td>{{ item.intflow | floatformat:2 }}</td>
+                        <td>{{ item.rentflow | floatformat:2 }}</td>
+                        <td>{{ item.used | floatformat:2 }}</td>
+                        <td>{{ item.avg |floatformat:2 }}</td>
+                        <td>{{ item.day_avg | floatformat:0 }}</td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}

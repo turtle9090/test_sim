@@ -1,0 +1,86 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+					<h5>SIM Inventory</h5>
+				<div class="card card-body">
+
+					<form method="get">
+						<div class="form-row">
+                      		<div class="form-group col-md-2 mb-0">
+                       			 {{ my_filter.form.operator_filter|as_crispy_field }}
+                     		 </div>
+							<div class="form-group col-md-2 mb-0">
+                       			 {{ my_filter.form.iccid_filter|as_crispy_field }}
+                     		 </div>
+							<div class="form-group col-md-1 mb-0">
+                       			 {{ my_filter.form.country_or_region|as_crispy_field }}
+                     		 </div>
+                     	 	<div class="form-group col-md-2 mb-0">
+                       			 {{ my_filter.form.sim_status|as_crispy_field }}
+                      		</div>
+							<div class="form-group col-md-1 mb-0"><br>
+                       			 <button class="btn btn-primary btn-md" type="submit">Search</button>
+                      		</div>
+                    	</div>
+
+            </form>
+						<table	data-toggle="table"
+								data-pagination="true"
+								data-search="true"
+								data-search-align="left"
+								data-show-columns="true"
+								data-show-fullscreen="true"
+								data-show-pagination-switch="true"
+								data-pagination-pre-text="Previous"
+								data-pagination-next-text="Next"
+								data-pagination-h-align="left"
+								data-pagination-detail-h-align="right"
+								data-page-list="[10, 50, 100, 500, 1000, All]">
+
+							<thead class="thead-dark">
+
+							<tr>
+								<th data-feld="#" data-sortable="true" scope="col">#</th>
+								<th data-feld="carrier" data-sortable="true" scope="col">Carrier</th>
+								<th data-feld="country" data-sortable="true" scope="col">Country</th>
+								<th data-feld="assigned" data-sortable="true" scope="col">Assigned</th>
+								<th data-feld="iccid" data-sortable="true" scope="col">ICCID</th>
+								<th data-feld="imsi" data-sortable="true" scope="col">IMSI</th>
+								<th data-feld="gb" data-sortable="true" scope="col">GB</th>
+								<th data-feld="package" data-sortable="true" scope="col">Package</th>
+								<th data-feld="status" data-sortable="true" scope="col">Status</th>
+								<th scope="col"></th>
+								<th scope="col"></th>
+							</tr>
+							</thead>
+							<tbody>
+							{% for sim in simlists %}
+							<tr>
+								<td scope="col">{{ forloop.counter }}</td>
+								<td>{{ sim.operator }}</td>
+								<td>{{ sim.country_or_region }}</td>
+								<td>#</td>
+								<td>{{ sim.vsim_iccid }}</td>
+								<td>{{ sim.vsim_iccid.package }}</td>
+								<td>#</td>
+								<td>#</td>
+								<td>{{ sim.sim_status }}</td>
+								<td><a href="#" class="btn btn-dark btn-sm" role="button">Edit</a></td>
+								<td><a href="#" class="btn btn-danger btn-sm" role="button">Delete</a></td>
+								</tr>
+							 {% endfor %}
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+{% endblock content %}

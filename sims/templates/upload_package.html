@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-body">
+            <h5>Package Upload</h5>
+            <div class="card card-body">
+            <div class="form-group">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {%csrf_token%}
+
+                    {{ form }}
+
+                    <button class="btn btn-primary btn-sm" type="submit">Confirm</button>
+                </form>
+             </div>
+            <ul class="messages">
+                {% for message in messages %}
+                <li>{% if message.tags %} {% endif %} {{ message }}</li>
+                {% endfor %}
+            </ul>
+                </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
